@@ -63,6 +63,34 @@ async function lectureQRCode(code) {
 
     message.innerHTML =
         "QR Code détecté :<br><br><b>" + code + "</b>";
+try {
+
+    const reponse = await fetch(CONFIG.API_URL, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            qr: code
+        })
+    });
+
+    const resultat = await reponse.json();
+
+    message.innerHTML +=
+        "<br><br><span style='color:green'>" +
+        resultat.message +
+        "</span>";
+
+} catch (erreur) {
+
+    message.innerHTML +=
+        "<br><br><span style='color:red'>Erreur de communication avec le serveur</span>";
+
+    console.error(erreur);
+
+}
+
 
     if (scanner) {
 
