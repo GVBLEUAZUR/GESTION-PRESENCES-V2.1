@@ -1,0 +1,55 @@
+/* =====================================================
+   GESTION PRÉSENCES V2.1
+   Feuille de style
+   ===================================================== */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f2f2f2;
+    text-align: center;
+}
+
+#application {
+    max-width: 500px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+h1 {
+    color: #1565c0;
+    margin-bottom: 5px;
+}
+
+h2 {
+    color: #666;
+    margin-top: 0;
+    margin-bottom: 30px;
+    font-weight: normal;
+}
+
+#btnScanner {
+    background: #1565c0;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 15px 30px;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+#btnScanner:hover {
+    background: #0d47a1;
+}
+
+#reader {
+    margin-top: 25px;
+}
+
+#message {
+    margin-top: 25px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #1565c0;
+}
