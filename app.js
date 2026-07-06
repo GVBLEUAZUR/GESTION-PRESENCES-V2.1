@@ -1,18 +1,19 @@
 /*
 =====================================================
-GESTION PRÉSENCES V2.1
+GESTION PRÉSENCES V2.2
 Scanner QR Code
 =====================================================
 */
 
 let scanner = null;
 let scannerActif = false;
+let scanEnCours = false;
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    const bouton = document.getElementById("btnScanner");
-
-    bouton.addEventListener("click", lancerScanner);
+    document
+        .getElementById("btnScanner")
+        .addEventListener("click", lancerScanner);
 
 });
 
@@ -20,6 +21,8 @@ document.addEventListener("DOMContentLoaded", () => {
 async function lancerScanner() {
 
     if (scannerActif) return;
+
+    scanEnCours = false;
 
     const message = document.getElementById("message");
     message.innerHTML = "Ouverture de la caméra...";
@@ -59,44 +62,60 @@ async function lancerScanner() {
 
 async function lectureQRCode(code) {
 
+    if (scanEnCours) {
+        return;
+    }
+
+    scanEnCours = true;
+
     const message = document.getElementById("message");
 
     message.innerHTML =
         "QR Code détecté :<br><br><b>" + code + "</b>";
-try {
 
-    const reponse = await fetch(CONFIG.API_URL, {
-        method: "POST",
-        
-        body: JSON.stringify({
-            qr: code
-        })
-    });
+    try {
 
-    const resultat = await reponse.json();
+        if (scanner) {
 
-    message.innerHTML +=
-        "<br><br><span style='color:green'>" +
-        resultat.message +
-        "</span>";
+            await scanner.stop();
 
-} catch (erreur) {
+            scanner.clear();
 
-    message.innerHTML +=
-        "<br><br><span style='color:red'>Erreur de communication avec le serveur</span>";
+            scannerActif = false;
 
-    console.error(erreur);
+        }
 
-}
+        const reponse = await fetch(CONFIG.API_URL, {
 
+            method: "POST",
 
-    if (scanner) {
+            body: JSON.stringify({
+                qr: code
+            })
 
-        await scanner.stop();
+        });
 
-        scanner.clear();
+        const resultat = await reponse.json();
 
-        scannerActif = false;
+        message.innerHTML +=
+            "<br><br><span style='color:green'>" +
+            resultat.message +
+            "</span>";
+
+    }
+
+    catch (erreur) {
+
+        message.innerHTML +=
+            "<br><br><span style='color:red'>Erreur de communication avec le serveur</span>";
+
+        console.error(erreur);
+
+    }
+
+    finally {
+
+        scanEnCours = false;
 
     }
 
