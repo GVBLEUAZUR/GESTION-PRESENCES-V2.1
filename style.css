@@ -1,31 +1,38 @@
-/* =====================================================
-   GESTION PRÉSENCES V2.1
-   Feuille de style
-   ===================================================== */
+/*
+=====================================================
+GVBLEUAZUR
+Version : V3.1.2
+Fichier : style.css
+
+Modernisation de l'interface
+Compatible V3.1.1
+
+=====================================================
+*/
 
 body {
     margin: 0;
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
-    background: #f2f2f2;
+    background: #eef3f8;
     text-align: center;
 }
 
 #application {
     max-width: 500px;
-    margin: 30px auto;
+    margin: 25px auto;
     padding: 20px;
 }
 
 h1 {
     color: #1565c0;
     margin-bottom: 5px;
+    font-size: 34px;
 }
 
 h2 {
-    color: #666;
     margin-top: 0;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     font-weight: normal;
 }
 
@@ -33,14 +40,16 @@ h2 {
     background: #1565c0;
     color: white;
     border: none;
-    border-radius: 10px;
-    padding: 15px 30px;
+    border-radius: 12px;
+    padding: 16px 34px;
     font-size: 22px;
     cursor: pointer;
+    transition: 0.3s;
 }
 
 #btnScanner:hover {
     background: #0d47a1;
+    transform: scale(1.03);
 }
 
 #reader {
@@ -49,7 +58,154 @@ h2 {
 
 #message {
     margin-top: 25px;
-    font-size: 22px;
-    font-weight: bold;
+}
+
+/* =====================================================
+   Attente
+===================================================== */
+
+.attente {
+
+    background: white;
+
+    border-radius: 15px;
+
+    padding: 25px;
+
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+
     color: #1565c0;
+
+    font-size: 22px;
+
+}
+
+/* =====================================================
+   Confirmation
+===================================================== */
+
+.confirmation {
+
+    background: #e8f5e9;
+
+    border: 3px solid #43a047;
+
+    border-radius: 18px;
+
+    padding: 25px;
+
+    box-shadow: 0 6px 18px rgba(0,0,0,0.20);
+
+    animation: apparition 0.4s ease;
+
+}
+
+.confirmation h2 {
+
+    color: #2e7d32;
+
+    font-size: 34px;
+
+    margin-bottom: 20px;
+
+}
+
+.confirmation h3 {
+
+    color: #1b5e20;
+
+    font-size: 32px;
+
+    margin: 10px 0;
+
+}
+
+.confirmation p {
+
+    font-size: 22px;
+
+    color: #333;
+
+}
+
+/* =====================================================
+   Erreur
+===================================================== */
+
+.erreur {
+
+    background: #ffebee;
+
+    border: 3px solid #d32f2f;
+
+    border-radius: 18px;
+
+    padding: 25px;
+
+    box-shadow: 0 6px 18px rgba(0,0,0,0.20);
+
+    animation: apparition 0.4s ease;
+
+}
+
+.erreur h2 {
+
+    color: #c62828;
+
+    font-size: 34px;
+
+}
+
+.erreur p {
+
+    font-size: 22px;
+
+    color: #444;
+
+}
+
+/* =====================================================
+   Prêt
+===================================================== */
+
+.pret {
+
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 25px;
+
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+
+    color: #1565c0;
+
+    font-size: 28px;
+
+    font-weight: bold;
+
+}
+
+/* =====================================================
+   Animation
+===================================================== */
+
+@keyframes apparition {
+
+    from {
+
+        opacity: 0;
+
+        transform: scale(0.90);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: scale(1);
+
+    }
+
 }
