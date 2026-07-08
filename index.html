@@ -5,10 +5,9 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Gestion Présences V2.1</title>
+    <title>GV BLEU AZUR - Gestion des Présences</title>
 
     <link rel="stylesheet" href="style.css">
 
@@ -16,29 +15,36 @@
 
 <body>
 
-    <div id="application">
+<div class="container">
 
-        <h1>GESTION DES PRÉSENCES</h1>
+    <div class="carte">
 
-        <h2>GV BLEU AZUR</h2>
+        <h1>🏐 GV BLEU AZUR</h1>
+
+        <p class="soustitre">
+            Gestion des présences
+        </p>
 
         <button id="btnScanner">
-
-            📷 Scanner une carte
-
+            📷 Scanner un QR Code
         </button>
 
         <div id="reader"></div>
 
-        <div id="message"></div>
+        <div id="message">
+            En attente d'un scan...
+        </div>
 
     </div>
+
+</div>
+
 <script src="https://unpkg.com/html5-qrcode"></script>
 
-    <script src="config.js"></script>
+<script src="config.js"></script>
 
-    <script src="app.js"></script>
+<script src="app.js"></script>
 
 </body>
 
-</html> 
+</html>

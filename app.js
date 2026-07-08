@@ -102,18 +102,26 @@ async function lectureQRCode(code) {
         const resultat = await reponse.json();
 
         if (resultat.success) {
+message.innerHTML = `
+    <div class="confirmation">
 
-            message.innerHTML = `
-                <div class="confirmation">
-                    <h2>✅ PRÉSENCE VALIDÉE</h2>
+        <h2>✅ PRÉSENCE VALIDÉE</h2>
 
-                    <h3>${resultat.prenom} ${resultat.nom}</h3>
+        <h3>${resultat.prenom} ${resultat.nom}</h3>
 
-                    <p><strong>Activité :</strong> ${resultat.sport || "-"}</p>
+        <p><strong>Activité :</strong> ${resultat.sport || "-"}</p>
 
-                    <p>${resultat.message}</p>
-                </div>
-            `;
+        ${
+            resultat.type === "CARTE10"
+            ? `<p><strong>🎟 Carte 10 séances</strong></p>
+               <p><strong>Séances restantes :</strong> ${resultat.solde}</p>`
+            : `<p><strong>⭐ Abonnement</strong></p>`
+        }
+
+        <p>${resultat.message}</p>
+
+    </div>
+`;
 
         } else {
 
@@ -136,7 +144,7 @@ async function lectureQRCode(code) {
                 </div>
             `;
 
-        }, 3000);
+        }, 6000);
 
     }
 
