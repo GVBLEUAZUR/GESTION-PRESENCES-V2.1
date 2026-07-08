@@ -14,7 +14,7 @@ const CONFIG = {
     QR_PREFIX: "GVB|",
 
     // Temps d'attente avant un nouveau scan
-    RESCAN_DELAY: 6000,
+    RESCAN_DELAY: 9000,
 
     // Vibration
     VIBRATION: true,

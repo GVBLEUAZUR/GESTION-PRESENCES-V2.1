@@ -144,7 +144,7 @@ message.innerHTML = `
                 </div>
             `;
 
-        }, 6000);
+        }, 9000);
 
     }
 
