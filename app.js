@@ -1,6 +1,6 @@
 /*
 =====================================================
-GESTION PRÉSENCES V2.2
+GESTION PRÉSENCES V3.1.1
 Scanner QR Code
 =====================================================
 */
@@ -17,7 +17,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-
 async function lancerScanner() {
 
     if (scannerActif) return;
@@ -25,7 +24,8 @@ async function lancerScanner() {
     scanEnCours = false;
 
     const message = document.getElementById("message");
-    message.innerHTML = "Ouverture de la caméra...";
+
+    message.innerHTML = "📷 Ouverture de la caméra...";
 
     scanner = new Html5Qrcode("reader");
 
@@ -53,25 +53,29 @@ async function lancerScanner() {
     catch (erreur) {
 
         message.innerHTML =
-            "Erreur caméra :<br><br>" + erreur;
+            "<div class='erreur'>❌ Impossible d'accéder à la caméra.<br><br>" +
+            erreur +
+            "</div>";
 
     }
 
 }
 
-
 async function lectureQRCode(code) {
 
-    if (scanEnCours) {
-        return;
-    }
+    if (scanEnCours) return;
 
     scanEnCours = true;
 
     const message = document.getElementById("message");
 
-    message.innerHTML =
-        "QR Code détecté :<br><br><b>" + code + "</b>";
+    message.innerHTML = `
+        <div class="attente">
+            🔍 QR Code détecté
+            <br><br>
+            <small>${code}</small>
+        </div>
+    `;
 
     try {
 
@@ -97,17 +101,52 @@ async function lectureQRCode(code) {
 
         const resultat = await reponse.json();
 
-        message.innerHTML +=
-            "<br><br><span style='color:green'>" +
-            resultat.message +
-            "</span>";
+        if (resultat.success) {
+
+            message.innerHTML = `
+                <div class="confirmation">
+                    <h2>✅ PRÉSENCE VALIDÉE</h2>
+
+                    <h3>${resultat.prenom} ${resultat.nom}</h3>
+
+                    <p><strong>Activité :</strong> ${resultat.sport || "-"}</p>
+
+                    <p>${resultat.message}</p>
+                </div>
+            `;
+
+        } else {
+
+            message.innerHTML = `
+                <div class="erreur">
+                    <h2>❌ ERREUR</h2>
+
+                    <p>${resultat.message}</p>
+                </div>
+            `;
+
+        }
+
+        setTimeout(() => {
+
+            message.innerHTML = `
+                <div class="pret">
+                    📷<br><br>
+                    Prêt pour un nouveau scan
+                </div>
+            `;
+
+        }, 3000);
 
     }
 
     catch (erreur) {
 
-        message.innerHTML +=
-            "<br><br><span style='color:red'>Erreur de communication avec le serveur</span>";
+        message.innerHTML = `
+            <div class="erreur">
+                ❌ Erreur de communication avec le serveur
+            </div>
+        `;
 
         console.error(erreur);
 
