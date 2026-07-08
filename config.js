@@ -8,7 +8,7 @@ Configuration
 const CONFIG = {
 
     // Adresse de ton API Apps Script
-    API_URL: "https://script.google.com/macros/s/AKfycbyowjx66wwdCT7uQllisAuBLxH32Ec5NH4eg2X8Low55UK-6_9JvzTFTl5MlkbD5EqN/exec",
+    API_URL: "https://script.google.com/macros/s/AKfycbwmSwkNaDzcgEB7ZSMhPEDSGYmFLVbiV2nmX7PlxfqEAGtuNtCCl4T5fHmxGjqjyxObSg/exec",
 
     // Préfixe des QR Codes
     QR_PREFIX: "GVB|",
