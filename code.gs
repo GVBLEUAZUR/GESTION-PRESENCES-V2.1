@@ -320,13 +320,11 @@ solde:solde,
   };
 
 }
-function genererQRCodes() 
+function genererQRCodes() {
 
-{Logger.log(SpreadsheetApp.getActiveSpreadsheet().getName());
-
-Logger.log(feuille.getLastRow());
-
-  const feuille = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("ADHERENTS");
+  const feuille = SpreadsheetApp
+      .getActiveSpreadsheet()
+      .getSheetByName("ADHERENTS");
 
   const derniereLigne = feuille.getLastRow();
 
@@ -334,7 +332,7 @@ Logger.log(feuille.getLastRow());
 
     const id = feuille.getRange(ligne, 1).getDisplayValue().trim();
 
-    if (id) {
+    if (id !== "") {
 
       feuille.getRange(ligne, 6).setValue("GVB|" + id);
 
@@ -342,7 +340,7 @@ Logger.log(feuille.getLastRow());
 
   }
 
+  SpreadsheetApp.getUi().alert("Les QR Codes ont été générés.");
+
 }
-
-
 
