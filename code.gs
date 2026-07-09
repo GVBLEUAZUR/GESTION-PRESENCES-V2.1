@@ -320,28 +320,29 @@ solde:solde,
   };
 
 }
-//---------------------------------------------------
-// Génération des QR Codes
-//---------------------------------------------------
+function genererQRCodes() 
 
-function genererQRCodes() {
+{Logger.log(SpreadsheetApp.getActiveSpreadsheet().getName());
 
-  const feuille = SpreadsheetApp
-      .getActiveSpreadsheet()
-      .getSheetByName("ADHERENTS");
+Logger.log(feuille.getLastRow());
 
-  const donnees = feuille.getDataRange().getValues();
+  const feuille = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("ADHERENTS");
 
-  for (let i = 1; i < donnees.length; i++) {
+  const derniereLigne = feuille.getLastRow();
 
-    const id = donnees[i][0];
+  for (let ligne = 2; ligne <= derniereLigne; ligne++) {
 
-    if (id !== "") {
+    const id = feuille.getRange(ligne, 1).getDisplayValue().trim();
 
-      feuille.getRange(i + 1, 6).setValue("GVB|" + id);
+    if (id) {
+
+      feuille.getRange(ligne, 6).setValue("GVB|" + id);
 
     }
 
   }
 
 }
+
+
+
