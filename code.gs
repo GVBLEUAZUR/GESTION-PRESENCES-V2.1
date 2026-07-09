@@ -320,3 +320,28 @@ solde:solde,
   };
 
 }
+//---------------------------------------------------
+// Génération des QR Codes
+//---------------------------------------------------
+
+function genererQRCodes() {
+
+  const feuille = SpreadsheetApp
+      .getActiveSpreadsheet()
+      .getSheetByName("ADHERENTS");
+
+  const donnees = feuille.getDataRange().getValues();
+
+  for (let i = 1; i < donnees.length; i++) {
+
+    const id = donnees[i][0];
+
+    if (id !== "") {
+
+      feuille.getRange(i + 1, 6).setValue("GVB|" + id);
+
+    }
+
+  }
+
+}
