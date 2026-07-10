@@ -163,38 +163,53 @@ if (adherent == null) {
         .getDataRange()
         .getValues();
 
-  let sport="";
-  let salle="";
-  let responsable="";
+let sport = "";
+let salle = "";
+let responsable = "";
+let coursTrouve = false;
 
-  for(let i=1;i<planning.length;i++){
+for (let i = 1; i < planning.length; i++) {
 
-      if(planning[i][0]!=jour)
-          continue;
+    if (planning[i][0] != jour)
+        continue;
 
-      const debut=Utilities.formatDate(
-          planning[i][1],
-          Session.getScriptTimeZone(),
-          "HH:mm"
-      );
+    const debut = Utilities.formatDate(
+        planning[i][1],
+        Session.getScriptTimeZone(),
+        "HH:mm"
+    );
 
-      const fin=Utilities.formatDate(
-          planning[i][2],
-          Session.getScriptTimeZone(),
-          "HH:mm"
-      );
+    const fin = Utilities.formatDate(
+        planning[i][2],
+        Session.getScriptTimeZone(),
+        "HH:mm"
+    );
 
-      if(heure>=debut && heure<fin){
+    if (heure >= debut && heure < fin) {
 
-          sport=planning[i][3];
-          salle=planning[i][4];
-          responsable=planning[i][5];
+        sport = planning[i][3];
+        salle = planning[i][4];
+        responsable = planning[i][5];
 
-          break;
+        coursTrouve = true;
 
-      }
+        break;
 
-  }
+    }
+
+}
+
+if (!coursTrouve) {
+
+    return {
+
+        success: false,
+
+        message: "Aucun cours n'est actuellement en cours."
+
+    };
+
+}
 
 
 //---------------------------------------------------
@@ -215,18 +230,21 @@ for (let i = 1; i < presences.length; i++) {
         "dd/MM/yyyy"
     );
 
-    if (
-        datePresence === date &&
-        String(presences[i][3]) === String(adherent[0]) &&
-        String(presences[i][6]) === String(sport)
-    ) {
+if (
+    datePresence === date &&
+    String(presences[i][2]).trim().toUpperCase() === jour &&
+    String(presences[i][3]) === String(adherent[0]) &&
+    String(presences[i][6]).trim().toUpperCase() === String(sport).trim().toUpperCase()
+) 
+{
 
-        dejaPresent = true;
-        break;
-
-    }
+    dejaPresent = true;
+    break;
 
 }
+
+}
+
 
 if (dejaPresent) {
 
@@ -343,4 +361,3 @@ function genererQRCodes() {
   SpreadsheetApp.getUi().alert("Les QR Codes ont été générés.");
 
 }
-
