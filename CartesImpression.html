@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<style>
+
+body{
+
+    font-family:Arial,sans-serif;
+    background:#eeeeee;
+    margin:30px;
+
+}
+
+.carte{
+
+    width:320px;
+    height:215px;
+
+    background:white;
+
+    border:1px solid #999;
+
+    border-radius:10px;
+
+    padding:15px;
+
+    box-sizing:border-box;
+
+    text-align:center;
+
+}
+
+.titre{
+
+    font-size:22px;
+
+    font-weight:bold;
+
+    color:#0055cc;
+
+    margin-bottom:8px;
+
+}
+
+#qrcode{
+
+    width:115px;
+
+    height:115px;
+
+    margin:auto;
+
+}
+
+.nom{
+
+    margin-top:10px;
+
+    font-size:17px;
+
+    font-weight:bold;
+
+}
+
+.prenom{
+
+    font-size:16px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="carte">
+
+<div class="titre">
+GVBLEUAZUR2
+</div>
+
+<div id="qrcode"></div>
+
+<div class="nom">
+<?= nomComplet ?>
+</div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<script>
+
+new QRCode(document.getElementById("qrcode"),{
+    text:"<?= qrCode ?>",
+    width:115,
+    height:115
+});
+
+</script>
+
+</body>
+
+</html>

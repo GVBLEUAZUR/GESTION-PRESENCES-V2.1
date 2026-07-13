@@ -1,10 +1,15 @@
 /*
  * ======================================================
- * GVBLEUAZUR2 V2
+ * GVBLEUAZUR2
+ * Version : V3.3 STABLE
  * Serveur Google Apps Script
+ *
+ * Historique :
+ * V3.1 : Scanner QR Code
+ * V3.2 : Cartes 10 séances
+ * V3.3 : Gestion des présences validée
  * ======================================================
  */
-
 const SH_ADHERENTS = "ADHERENTS";
 const SH_PLANNING = "PLANNING";
 const SH_PRESENCES = "PRESENCES";
@@ -359,5 +364,14 @@ function genererQRCodes() {
   }
 
   SpreadsheetApp.getUi().alert("Les QR Codes ont été générés.");
+
+}
+
+function onOpen() {
+
+  SpreadsheetApp.getUi()
+    .createMenu("GVBLEUAZUR2")
+    .addItem("Imprimer les cartes", "afficherPremiereCarte")
+    .addToUi();
 
 }

@@ -1,50 +1,104 @@
 <!DOCTYPE html>
-<html lang="fr">
-
+<html>
 <head>
+  <base target="_top">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta charset="UTF-8">
+  <script src="https://unpkg.com/html5-qrcode"></script>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body{
+      font-family:Arial,sans-serif;
+      text-align:center;
+      margin-top:40px;
+      background:#f5f5f5;
+    }
 
-    <title>GV BLEU AZUR - Gestion des Présences</title>
+    h1{
+      color:#1565c0;
+    }
 
-    <link rel="stylesheet" href="style.css">
+    button{
+      font-size:22px;
+      padding:15px 30px;
+      border:none;
+      border-radius:10px;
+      background:#1565c0;
+      color:white;
+    }
+
+    #reader{
+      width:320px;
+      margin:20px auto;
+    }
+
+    #resultat{
+      margin-top:20px;
+      font-size:20px;
+      white-space:pre-line;
+    }
+
+  </style>
 
 </head>
 
 <body>
 
-<div class="container">
+<h1>GVBLEUAZUR2</h1>
 
-    <div class="carte">
+<button onclick="demarrerScanner()">
+📷 Scanner une carte
+</button>
 
-        <h1>🏐 GV BLEU AZUR</h1>
+<div id="reader"></div>
 
-        <p class="soustitre">
-            Gestion des présences
-        </p>
+<div id="resultat"></div>
 
-        <button id="btnScanner">
-            📷 Scanner un QR Code
-        </button>
+<script>
 
-        <div id="reader"></div>
+let scanner;
+function demarrerScanner(){
 
-        <div id="message">
-            En attente d'un scan...
-        </div>
+  document.getElementById("resultat").innerHTML="Ouverture de la caméra...";
 
-    </div>
+  scanner = new Html5Qrcode("reader");
 
-</div>
+  scanner.start(
 
-<script src="https://unpkg.com/html5-qrcode"></script>
+      { facingMode: "environment" },
 
-<script src="config.js"></script>
+      {
+        fps:10,
+        qrbox:250
+      },
 
-<script src="app.js"></script>
+      function(decodedText){
+
+          scanner.stop();
+
+          google.script.run
+            .withSuccessHandler(function(message){
+
+                document.getElementById("resultat").innerHTML=message;
+
+            })
+            .enregistrerPresence(decodedText);
+
+      },
+
+      function(errorMessage){
+          // on ignore les erreurs de lecture
+      }
+
+  ).catch(function(err){
+
+      document.getElementById("resultat").innerHTML=err;
+
+  });
+
+}
+
+</script>
 
 </body>
-
 </html>
