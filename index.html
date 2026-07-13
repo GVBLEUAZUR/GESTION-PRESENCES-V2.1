@@ -1,104 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
+
 <head>
-  <base target="_top">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <script src="https://unpkg.com/html5-qrcode"></script>
+    <meta charset="UTF-8">
 
-  <style>
-    body{
-      font-family:Arial,sans-serif;
-      text-align:center;
-      margin-top:40px;
-      background:#f5f5f5;
-    }
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    h1{
-      color:#1565c0;
-    }
+    <title>GV BLEU AZUR - Gestion des Présences</title>
 
-    button{
-      font-size:22px;
-      padding:15px 30px;
-      border:none;
-      border-radius:10px;
-      background:#1565c0;
-      color:white;
-    }
-
-    #reader{
-      width:320px;
-      margin:20px auto;
-    }
-
-    #resultat{
-      margin-top:20px;
-      font-size:20px;
-      white-space:pre-line;
-    }
-
-  </style>
+    <link rel="stylesheet" href="style.css">
 
 </head>
 
 <body>
 
-<h1>GVBLEUAZUR2</h1>
+<div class="container">
 
-<button onclick="demarrerScanner()">
-📷 Scanner une carte
-</button>
+    <div class="carte">
 
-<div id="reader"></div>
+        <h1>🏐 GV BLEU AZUR</h1>
 
-<div id="resultat"></div>
+        <p class="soustitre">
+            Gestion des présences
+        </p>
 
-<script>
+        <button id="btnScanner">
+            📷 Scanner un QR Code
+        </button>
 
-let scanner;
-function demarrerScanner(){
+        <div id="reader"></div>
 
-  document.getElementById("resultat").innerHTML="Ouverture de la caméra...";
+        <div id="message">
+            En attente d'un scan...
+        </div>
 
-  scanner = new Html5Qrcode("reader");
+    </div>
 
-  scanner.start(
+</div>
 
-      { facingMode: "environment" },
+<script src="https://unpkg.com/html5-qrcode"></script>
 
-      {
-        fps:10,
-        qrbox:250
-      },
+<script src="config.js"></script>
 
-      function(decodedText){
-
-          scanner.stop();
-
-          google.script.run
-            .withSuccessHandler(function(message){
-
-                document.getElementById("resultat").innerHTML=message;
-
-            })
-            .enregistrerPresence(decodedText);
-
-      },
-
-      function(errorMessage){
-          // on ignore les erreurs de lecture
-      }
-
-  ).catch(function(err){
-
-      document.getElementById("resultat").innerHTML=err;
-
-  });
-
-}
-
-</script>
+<script src="app.js"></script>
 
 </body>
+
 </html>
